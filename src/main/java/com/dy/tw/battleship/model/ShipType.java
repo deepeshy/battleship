@@ -1,4 +1,4 @@
-package com.dy.tw.battleship;
+package com.dy.tw.battleship.model;
 
 public enum ShipType {
   P(2), Q(1);

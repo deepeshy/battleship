@@ -1,15 +1,10 @@
 package com.dy.tw.battleship;
 
-// TODO Refactor/Cleanup
-// TODO Logic to check if someone won
-// TODO Validations
-// TODO Testcases
-
+import com.dy.tw.battleship.model.Game;
 import com.dy.tw.battleship.model.Player;
 import com.dy.tw.battleship.model.Ship;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class Battleship {
@@ -18,8 +13,9 @@ public class Battleship {
     // Read the inputs per the specification (except the hits)
     // Set the game up
     // Interpret the moves
-    Player p1 = new Player("Player 1");
-    Player p2 = new Player("Player 2");
+    Player p1 = new Player("Player-1");
+    Player p2 = new Player("Player-2");
+
     Scanner scanner = new Scanner(System.in);
     int width = scanner.nextInt();
     String height = scanner.next();
@@ -36,37 +32,12 @@ public class Battleship {
     }
 
     String p1MovesInput = scanner.nextLine();
-    Queue<String> p1Moves = new LinkedList<String>(Arrays.asList(p1MovesInput.split(" ")));
+    p1.setMoves(new LinkedList<>(Arrays.asList(p1MovesInput.split(" "))));
+
     String p2MovesInput = scanner.nextLine();
-    Queue<String> p2Moves = new LinkedList<String>(Arrays.asList(p2MovesInput.split(" ")));
+    p2.setMoves(new LinkedList<>(Arrays.asList(p2MovesInput.split(" "))));
 
-    while (!p1Moves.isEmpty() || !p2Moves.isEmpty()) {
-      if (p1Moves.isEmpty()) {
-        System.out.println(p1.getName() + " has no more missiles left to fire");
-      } else {
-        while (p1.attack(p2, p1Moves.poll())) {
-          if (p1Moves.isEmpty()) {
-            System.out.println(p1.getName() + " has no more missiles left to fire");
-          }
-          break;
-        }
-      }
-
-      if (p2Moves.isEmpty()) {
-        System.out.println(p2.getName() + " has no more missiles left to fire");
-
-      } else {
-        while (p2.attack(p1, p2Moves.poll())) {
-          if (p2Moves.isEmpty()) {
-            System.out.println(p2.getName() + " has no more missiles left to fire");
-            break;
-          }
-        }
-      }
-    }
-
-    System.out.println(p1);
-    System.out.println(p2);
-
+    Game g = new Game(p1, p2);
+    g.play();
   }
 }

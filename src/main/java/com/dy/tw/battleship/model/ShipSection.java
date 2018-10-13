@@ -1,17 +1,16 @@
 package com.dy.tw.battleship.model;
 
-import com.dy.tw.battleship.utils.Utils;
-
 public class ShipSection {
+
+  private final static char FIRST_ROW_ALPHABET = 'A';
 
   private int row;
   private int column;
   private int lifeCount;
-//
-//  public ShipSection(char rowChar, int column) {
-//    this.row = row - Character.toLowerCase(rowChar) - 65;
-//    this.column = column - 1;
-//  }
+
+  boolean isDead() {
+    return lifeCount == 0;
+  }
 
   // Uses the absolute value of coordinates to create a position
   private ShipSection(int rowInt, int column, int lifeCount) {
@@ -20,44 +19,26 @@ public class ShipSection {
     this.lifeCount = lifeCount;
   }
 
-  public ShipSection(String posString, int lifeCount) {
-//    this.row = Character.toLowerCase(posString.charAt(0)) - 65;
-//    this.column = Integer.parseInt(String.valueOf(posString.charAt(1))) - 1;
-    int[] xy = Utils.getCoordinates(posString);
+  ShipSection(String posString, int lifeCount) {
+    int[] xy = getCoordinates(posString);
     this.row = xy[0];
     this.column = xy[1];
     this.lifeCount = lifeCount;
   }
-//
-//  public char getRow() {
-//    return (char) (row + 65);
-//  }
 
-//  public int getColumn() {
-//    return column + 1;
-//  }
-//
-//  public ShipSection getRightCell() {
-//    return new ShipSection(row, column + 1);
-//  }
-//
-//  public ShipSection getDown() {
-//    return new ShipSection(row + 1, column);
-//  }
-
-  public ShipSection getRightCellByN(int n) {
+  ShipSection getRightCellByN(int n) {
     return new ShipSection(row, column + n, this.lifeCount);
   }
 
-  public ShipSection getDownByN(int n) {
+  ShipSection getDownByN(int n) {
     return new ShipSection(row + n, column, this.lifeCount);
   }
 
-  public boolean handleAttack(String loc) {
+  boolean handleAttack(String loc) {
     if (this.lifeCount == 0) {
       return false;
     }
-    int[] xy = Utils.getCoordinates(loc);
+    int[] xy = getCoordinates(loc);
     if (xy[0] == row && xy[1] == column) {
       this.lifeCount--;
       return true;
@@ -65,11 +46,18 @@ public class ShipSection {
     return false;
   }
 
+  private int[] getCoordinates(String loc) {
+    int[] ints = new int[2];
+    ints[0] = (int) (Character.toUpperCase(loc.charAt(0))) - FIRST_ROW_ALPHABET;
+    ints[1] = Integer.parseInt(String.valueOf(loc.charAt(1))) - 1;
+    return ints;
+  }
+
   @Override
   public String toString() {
     return "ShipSection{" +
-        "row=" + (char) ((int) row + 65) +
-        ", column=" + (int) (column + 1) +
+        "row=" + (char) (row + FIRST_ROW_ALPHABET) +
+        ", column=" + column + 1 +
         '}';
   }
 }

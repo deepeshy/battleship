@@ -1,6 +1,5 @@
 package com.dy.tw.battleship.model;
 
-import com.dy.tw.battleship.ShipType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,40 +8,29 @@ public class Ship {
   private int width;
   private int height;
   private ShipType type;
-  private List<ShipSection> shipSections = new ArrayList<ShipSection>();
+  private List<ShipSection> shipSections = new ArrayList<>();
 
   public Ship(String type, int width, int height, String position) {
     // TODO Add bunch of validators here to ensure right stuff comes in
     this.width = width;
     this.height = height;
-    if (type.equals("Q")) {
-      this.type = ShipType.Q;
-    }
-    if (type.equals("P")) {
-      this.type = ShipType.P;
-    }
+    // Get the corresponding ShipType based on the string supplied (P/Q), will throw an exception
+    // otherwise
+    this.type = ShipType.valueOf(type);
 
     ShipSection currCell = new ShipSection(position, this.type.getHitCount());
     shipSections.add(currCell);
     for (int i = 0; i < height; i++) {
       currCell = currCell.getDownByN(i);
-      for (int j = 0; j < width; j++) {
+      for (int j = 1; j < width; j++) {
         shipSections.add(currCell.getRightCellByN(j));
       }
     }
   }
 
-//  public int getWidth() {
-//    return width;
-//  }
-//
-//  public int getHeight() {
-//    return height;
-//  }
-//
-//  public ShipType getType() {
-//    return type;
-//  }
+  public boolean isDead() {
+    return shipSections.stream().allMatch(ShipSection::isDead);
+  }
 
   public boolean handleAttack(String loc) {
     for (ShipSection section : shipSections) {
