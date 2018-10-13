@@ -26,6 +26,18 @@ public class ShipSection {
     this.lifeCount = lifeCount;
   }
 
+  public int getRow() {
+    return row;
+  }
+
+  public int getColumn() {
+    return column;
+  }
+
+  public int getLifeCount() {
+    return lifeCount;
+  }
+
   ShipSection getRightCellByN(int n) {
     return new ShipSection(row, column + n, this.lifeCount);
   }
