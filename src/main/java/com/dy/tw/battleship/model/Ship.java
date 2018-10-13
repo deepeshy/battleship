@@ -11,7 +11,6 @@ public class Ship {
   private List<ShipSection> shipSections = new ArrayList<>();
 
   public Ship(String type, int width, int height, String position) {
-    // TODO Add bunch of validators here to ensure right stuff comes in
     this.width = width;
     this.height = height;
     // Get the corresponding ShipType based on the string supplied (P/Q), will throw an exception

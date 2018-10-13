@@ -18,7 +18,8 @@ public class Battleship {
 
     Scanner scanner = new Scanner(System.in);
     int width = scanner.nextInt();
-    String height = scanner.next();
+    char height = scanner.next().charAt(0);
+
     int shipCount = scanner.nextInt();
     scanner.nextLine();
     for (int i = 0; i < shipCount; i++) {
@@ -38,6 +39,6 @@ public class Battleship {
     p2.setMoves(new LinkedList<>(Arrays.asList(p2MovesInput.split(" "))));
 
     Game g = new Game(p1, p2);
-    g.play();
+    System.out.println(g.play());
   }
 }

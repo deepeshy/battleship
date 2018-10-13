@@ -45,7 +45,7 @@ public class Game {
     return false;
   }
 
-  public void play() {
+  public String play() {
     while (!p1.getMoves().isEmpty() || !p2.getMoves().isEmpty()) {
       if (playoutAttack(p1, p2)) {
         break;
@@ -54,6 +54,6 @@ public class Game {
         break;
       }
     }
-    System.out.println(commentary.toString());
+    return commentary.toString();
   }
 }

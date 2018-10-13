@@ -39,7 +39,7 @@ public class Player {
   }
 
   String getWinningMessage() {
-    return this.name + " wins";
+    return this.name + " won the battle";
   }
 
   boolean attack(Player opposition, StringBuffer commentary) {
