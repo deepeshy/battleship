@@ -1,7 +1,7 @@
 package com.dy.tw.battleship.model;
 
 public enum ShipType {
-  P(2), Q(1);
+  P(1), Q(2);
 
   private int hitCount;
 
