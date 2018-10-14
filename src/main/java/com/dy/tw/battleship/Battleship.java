@@ -10,9 +10,12 @@ import java.util.Scanner;
 public class Battleship {
 
   public static void main(String[] args) {
-    // Read the inputs per the specification (except the hits)
-    // Set the game up
-    // Interpret the moves
+
+    // No validations are added for constraints assuming they will be honored
+    // Apart from those there may still be few more validations needed like
+    // ships should not overhang
+    // ships should not overlap
+
     Player p1 = new Player("Player-1");
     Player p2 = new Player("Player-2");
 
