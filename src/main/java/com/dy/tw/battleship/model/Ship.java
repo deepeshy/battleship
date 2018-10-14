@@ -18,13 +18,17 @@ public class Ship {
     this.type = ShipType.valueOf(type);
 
     ShipSection currCell = new ShipSection(position, this.type.getHitCount());
-    shipSections.add(currCell);
     for (int i = 0; i < height; i++) {
       currCell = currCell.getDownByN(i);
+      shipSections.add(currCell);
       for (int j = 1; j < width; j++) {
         shipSections.add(currCell.getRightCellByN(j));
       }
     }
+  }
+
+  public List<ShipSection> getShipSections() {
+    return shipSections;
   }
 
   public boolean isDead() {

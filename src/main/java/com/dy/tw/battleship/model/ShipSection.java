@@ -66,10 +66,38 @@ public class ShipSection {
   }
 
   @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    ShipSection that = (ShipSection) o;
+
+    if (row != that.row) {
+      return false;
+    }
+    if (column != that.column) {
+      return false;
+    }
+    return lifeCount == that.lifeCount;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = row;
+    result = 31 * result + column;
+    result = 31 * result + lifeCount;
+    return result;
+  }
+
+  @Override
   public String toString() {
     return "ShipSection{" +
-        "row=" + (char) (row + FIRST_ROW_ALPHABET) +
-        ", column=" + column + 1 +
+        "row=" + (char) ((int) row + (int) FIRST_ROW_ALPHABET) +
+        ", column=" + (int) ((int) column + 1) +
         '}';
   }
 }
